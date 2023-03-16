@@ -13,5 +13,6 @@ RUN ["/bin/bash", "-c", "set -o pipefail && curl -sSL https://install.python-poe
 
 COPY . .
 RUN /usr/local/share/pypoetry/bin/poetry install --no-dev
+RUN export PATH="/usr/local/share/pypoetry/bin:$PATH" && python3 /usr/src/app/updater.py
 
 CMD [ "/usr/local/share/pypoetry/bin/poetry", "run", "python", "./start_us.py" ]
