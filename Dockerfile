@@ -10,9 +10,10 @@ ENV POETRY_HOME=/usr/local/share/pypoetry
 ENV POETRY_VIRTUALENVS_CREATE=false
 
 RUN ["/bin/bash", "-c", "set -o pipefail && curl -sSL https://install.python-poetry.org | python3 -"]
+RUN export PATH="/usr/local/share/pypoetry/bin:$PATH" && python3 /usr/src/app/updater.py
 
 COPY . .
 RUN /usr/local/share/pypoetry/bin/poetry install --no-dev
-RUN export PATH="/usr/local/share/pypoetry/bin:$PATH" && python3 /usr/src/app/updater.py
+
 
 CMD [ "/usr/local/share/pypoetry/bin/poetry", "run", "python", "./start_us.py" ]
